@@ -1,0 +1,85 @@
+<div class="container col-md-6">
+  <div class="card">
+    <div class="card-header">
+        <h3>Creer une commande</h3>
+    </div>
+    <div class="card-body">
+        <form>
+
+           <div class="form-group">
+            <label for="client" class="gray-text">Nom Client</label>
+            <select id="client" name="client"  #client ="ngModel" 
+                class="form-control" [(ngModel)]="selectedClient">
+                <option *ngFor="let client of clients" [ngValue]="client">
+                  {{client.firstName}}
+                </option>
+            </select>
+            
+            <span *ngIf="error!=null">
+              <font color="red">{{error}}</font>
+            </span>
+          </div>
+          <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="produit">Produit</label>
+       <select id="produit" class="form-control" name="produit" #produit ="ngModel" [(ngModel)]="selectedProduct">
+        <option *ngFor="let prod of products" [ngValue]="prod">
+          {{prod.name}}
+        </option>
+      </select>
+      
+    </div>
+    <div class="form-group col-md-2">
+      <label for="pu">PU</label>
+      <input type="text" class="form-control" id="pu" [(ngModel)] ="unitPrice" name="pu">
+    </div>
+    <div class="form-group col-md-2">
+      <label for="qtt">Qtt</label>
+      <input type="text" class="form-control" id="qtt" [(ngModel)] ="qtt" name="qtt">
+    </div>
+     <div class="form-group col-md-2">
+      <label for="pt">PT</label>
+      <input type="text" readonly class="form-control-plaintext" id="pt"
+      name="pt">{{lineTotal}}
+    </div>
+  </div>
+  <div *ngIf="ligneCommandes?.length > 0">
+     <div class="form-group col-md-4">
+      <label for="produit">Produit</label>
+       <select id="produit" class="form-control" name="produit" #produit ="ngModel" [(ngModel)]="selectedProduct">
+        <option *ngFor="let prod of products" [ngValue]="prod">
+          {{prod.name}}
+        </option>
+      </select>
+      
+    </div>
+    <div class="form-group col-md-2">
+      <label for="pu">PU</label>
+      <input type="text" class="form-control" id="pu" [(ngModel)] ="unitPrice" name="pu">
+    </div>
+    <div class="form-group col-md-2">
+      <label for="qtt">Qtt</label>
+      <input type="text" class="form-control" id="qtt" [(ngModel)] ="qtt" name="qtt">
+    </div>
+     <div class="form-group col-md-2">
+      <label for="pt">PT</label>
+      <input type="text" readonly class="form-control-plaintext" id="pt"
+      name="pt">{{lineTotal}}
+    </div>
+  </div>
+  <button class="btn btn-primary" (click)="addNewLine()" >Nouveau produit</button> <br> <br>
+          
+            <button class="btn btn-success" type="submit" (click)="register()">Save
+              <i class="mdi-content-send right green-text"></i>
+            </button>
+            <button class="btn " type="submit" (click)="anuuler()" >Annuler
+              <i class="mdi-content-send right green-text"></i>
+            </button>
+        
+
+      </form>
+    </div>
+      
+  </div>
+
+</div>

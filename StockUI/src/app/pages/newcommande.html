@@ -1,0 +1,81 @@
+<div class="container col-md-6">
+  <div class="card">
+    <div class="card-header">
+        <h3>Creer une commande</h3>
+    </div>
+    <div class="card-body">
+        <form #commandeForm ="ngForm">
+
+           <div class="form-group">
+            <label for="client" class="gray-text">Nom Client</label>
+            <select id="client" name="client"  #client ="ngModel" 
+                class="form-control" [(ngModel)]="selectedClient">
+                <option *ngFor="let client of clients" [ngValue]="client">
+                  {{client.firstName}}
+                </option>
+            </select>
+            
+            <span *ngIf="error!=null">
+              <font color="red">{{error}}</font>
+            </span>
+          </div>
+          <div >
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                <th>Produit</th>
+                <th>PU</th>
+                <th>Qtt</th>
+                <th>Montant</th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let ligne of ligneCommandes">
+                  <td>{{ligne.product.name}}</td>
+                  <td>{{ligne.unitPrice}}</td>
+                  <td>{{ligne.qty}}</td>
+                  <td>{{ligne.totalCost}}</td>
+                  <td>
+                    <span (click)="removeItem(ligne.id)">X</span>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot *ngIf="editItem  == true">
+                <tr >
+                  <td>
+                     <select id="produit" class="form-control" name="produit" #produit ="ngModel" 
+                     [(ngModel)]="ligneCommande.product" (change)="onProducChange()">
+                      <option *ngFor="let prod of products" [ngValue]="prod">
+                        {{prod.name}}
+                      </option>
+                    </select>
+                  </td>
+                  <td><input type="text" [(ngModel)]="ligneCommande.unitPrice" name="unitPrice"> </td>
+                  <td><input type="text" [(ngModel)]="ligneCommande.qty" name="qty"> </td>
+                  <td>{{ligneCommande.totalCost}}</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tfoot>
+            </table>
+            <div class="pull-right">Total: {{total}}</div>
+            <div>
+              <a (click)="addItem()">Ajouter un element</a>
+            </div>
+          </div>
+          
+            <button class="btn btn-success" type="submit" (click)="register()">Save
+              <i class="mdi-content-send right green-text"></i>
+            </button>
+            <button class="btn " type="submit" (click)="anuuler()" >Annuler
+              <i class="mdi-content-send right green-text"></i>
+            </button>
+        
+
+      </form>
+    </div>
+      
+  </div>
+
+</div>
